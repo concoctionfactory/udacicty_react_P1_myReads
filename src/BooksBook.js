@@ -1,6 +1,11 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 
 class BooksBook extends Component{
+    static PropTypes={
+        booksArray: PropTypes.array.isRequired,
+        changeShelve: PropTypes.func.isRequired 
+    }
     
     onSelect= function(e){
         e.preventDefault();
@@ -10,37 +15,33 @@ class BooksBook extends Component{
 
     render(){
         const{book}= this.props;
-        //console.log(this);
         book.shelf =(book.shelf)?  book.shelf: "none";
 
         return(
-            <div>
-                <div className="book" key={book.id}>
-                    <div className="book-top">
-                        <div className="book-cover" 
-                            style={{backgroundImage: `url(${book.imageLinks.thumbnail})` }}>
-                        </div>
-
-                        <div className="book-shelf-changer">
-                            <select onChange={(e) =>this.onSelect(e)} value={book.shelf} >
-                                <option value="none" disabled>Move to...</option>
-                                <option value="currentlyReading">Currently Reading</option>
-                                <option value="wantToRead">Want to Read</option>
-                                <option value="read">Read</option>
-                                <option value="none">None</option>
-                            </select>
-                        </div> 
+            
+            <div className="book" key={book.id}>
+                <div className="book-top">
+                    <div className="book-cover" 
+                        style={{backgroundImage: `url(${book.imageLinks.thumbnail})` }}>
                     </div>
 
-
-                    <div className="book-title">{book.title}</div>
-                    {book.authors != null &&(
-                        //console.log(this.props.book.authors),
-                        book.authors.map(author=>
-                            <div className="book-authors" key={author} >{author}</div>
-                        )                            
-                    )}
+                    <div className="book-shelf-changer">
+                        <select onChange={(e) =>this.onSelect(e)} value={book.shelf} >
+                            <option value="none" disabled>Move to...</option>
+                            <option value="currentlyReading">Currently Reading</option>
+                            <option value="wantToRead">Want to Read</option>
+                            <option value="read">Read</option>
+                            <option value="none">None</option>
+                        </select>
+                    </div> 
                 </div>
+
+                <div className="book-title">{book.title}</div>
+                {book.authors != null &&(
+                    book.authors.map(author=>
+                        <div className="book-authors" key={author} >{author}</div>
+                    )                            
+                )}
             </div>
         )
     }

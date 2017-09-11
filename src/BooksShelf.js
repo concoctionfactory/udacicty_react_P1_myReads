@@ -1,13 +1,15 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import BooksBook from './BooksBook'
 
 class BooksShelf extends Component{
+    static PropTypes={
+        booksArray: PropTypes.array.isRequired,
+        changeShelve: PropTypes.func.isRequired 
+    }
     
-
     render(){
-        const{name}=this.props;
-        const{booksArray, changeShelve}=this.props;
-        //console.log(this);
+        const{booksArray, changeShelve, name}=this.props;
         return(
             <div className="bookshelf">
                 {name != null &&(
@@ -15,10 +17,11 @@ class BooksShelf extends Component{
                 )}
 
                 <div className="bookshelf-books">
-                
                     <ol className="books-grid">
                         {booksArray.map( book =>
-                            <BooksBook  book={book} className="book" key={book.id}  changeShelve={changeShelve}/>
+                            <li key={book.id}>
+                                <BooksBook  book={book} className="book"   changeShelve={changeShelve}/>
+                            </li>
                         )}
                     </ol>
                 </div>
