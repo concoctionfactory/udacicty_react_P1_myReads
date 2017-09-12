@@ -16,9 +16,9 @@ class BooksBook extends Component{
     render(){
         const{book}= this.props;
         book.shelf =(book.shelf)?  book.shelf: "none";
+        var authors = book.authors ? book.authors.join(', '): '';
 
         return(
-            
             <div className="book" key={book.id}>
                 <div className="book-top">
                     <div className="book-cover" 
@@ -37,11 +37,8 @@ class BooksBook extends Component{
                 </div>
 
                 <div className="book-title">{book.title}</div>
-                {book.authors != null &&(
-                    book.authors.map(author=>
-                        <div className="book-authors" key={author} >{author}</div>
-                    )                            
-                )}
+                <div className="book-authors" key={authors} >{authors}</div>
+                
             </div>
         )
     }

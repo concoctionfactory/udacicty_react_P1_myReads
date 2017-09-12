@@ -28,8 +28,11 @@ class SearchBooks extends Component{
 
     handleSearch=(e) =>{
         var query=(e.target.value).trim();
-        BooksAPI.search(query, 20).then((searchArray)=>
-        this.setState({searchArray}));
+        if (query.length){
+            BooksAPI.search(query, 20).then(searchArray=>
+            this.setState({searchArray})).catch(searchArray=>
+            this.setState( {searchArray:[]} ));
+        }
     }
 
 
