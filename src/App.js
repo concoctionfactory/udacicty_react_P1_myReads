@@ -15,9 +15,11 @@ class BooksApp extends Component {
   
 
   componentDidMount(){
+    console.log(BooksAPI.getAll());
     BooksAPI.getAll().then((booksArray)=>{
       this.setState({booksArray})
     })
+    console.log(this.state)
   }
 
 
@@ -49,6 +51,7 @@ class BooksApp extends Component {
 
   render() {
     self =this;
+    console.log(this.state);
     return (
       <div className="app">
         <Route exact path="/" render={()=>(
